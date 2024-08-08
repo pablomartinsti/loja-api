@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { v4 } from 'uuid';
 import * as Yup from 'yup';
 
 import User from '../models/User';
@@ -46,7 +46,7 @@ class UserController {
         }
 
         const user = await User.create({
-            id: uuidv4(),
+            id: v4(),
             name,
             date_of_birth,
             gender,
