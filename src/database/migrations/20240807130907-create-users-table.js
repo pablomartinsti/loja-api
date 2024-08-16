@@ -8,8 +8,9 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
-      }, name: {
+        defaultValue: Sequelize.UUIDV4,
+      },
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -61,11 +62,11 @@ module.exports = {
       },
       password_hash: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       admin: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -74,11 +75,11 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-      }
+      },
     });
   },
 
   async down(queryInterface) {
     await queryInterface.dropTable('users');
-  }
+  },
 };
