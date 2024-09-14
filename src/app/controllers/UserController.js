@@ -7,18 +7,9 @@ class UserController {
   async store(request, response) {
     const schema = Yup.object({
       name: Yup.string().required(),
-      date_of_birth: Yup.string().required(),
-      gender: Yup.string().required(),
-      cpf: Yup.string().required(),
       phone: Yup.string().required(),
-      mobile: Yup.string(),
       email: Yup.string().email().required(),
       password: Yup.string().min(6).required(),
-      city: Yup.string().required(),
-      street: Yup.string().required(),
-      number: Yup.string().required(),
-      complement: Yup.string(),
-      neighborhood: Yup.string().required(),
       admin: Yup.boolean(),
     });
 
@@ -28,22 +19,7 @@ class UserController {
       return response.status(400).json({ error: err.errors });
     }
 
-    const {
-      name,
-      date_of_birth,
-      gender,
-      cpf,
-      phone,
-      mobile,
-      email,
-      street,
-      number,
-      complement,
-      neighborhood,
-      city,
-      admin,
-      password,
-    } = request.body;
+    const { name, phone, email, admin, password } = request.body;
 
     const userExists = await User.findOne({
       where: {
@@ -52,23 +28,14 @@ class UserController {
     });
 
     if (userExists) {
-      return response.status(400).json({ error: 'User already exists' });
+      return response.status(409).json({ error: 'User already exists' });
     }
 
     const user = await User.create({
       id: v4(),
       name,
-      date_of_birth,
-      gender,
-      cpf,
       phone,
-      mobile,
       email,
-      street,
-      number,
-      complement,
-      neighborhood,
-      city,
       admin,
       password,
     });

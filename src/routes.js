@@ -17,7 +17,6 @@ routes.post('/users', UserController.store);
 routes.post('/session', SessionController.store);
 
 routes.use(authMiddleware);
-
 routes.post('/products', upload.single('file'), ProductController.store);
 routes.get('/products', ProductController.index);
 routes.put('/products/:id', upload.single('file'), ProductController.update);
